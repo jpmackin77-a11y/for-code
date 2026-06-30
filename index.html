@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Oliver Sterzer — The GOAT</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      text-align: center;
+      padding: 40px 20px;
+      position: relative;
+    }
+
+    .hero::before {
+      content: "🔥";
+      font-size: 120px;
+      position: absolute;
+      top: 20px;
+      left: 30px;
+      opacity: 0.15;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .hero::after {
+      content: "💰";
+      font-size: 100px;
+      position: absolute;
+      bottom: 40px;
+      right: 40px;
+      opacity: 0.15;
+      animation: float 4s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .avatar {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 5px solid gold;
+      object-fit: cover;
+      box-shadow: 0 0 40px gold, 0 0 80px rgba(255,215,0,0.3);
+      margin-bottom: 30px;
+      background: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+    }
+
+    .crown {
+      font-size: 60px;
+      margin-bottom: 10px;
+      animation: bounce 1s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, gold, #fff, gold);
+      background-size: 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 2s infinite linear;
+      letter-spacing: 2px;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% }
+      100% { background-position: 200% }
+    }
+
+    .hero .tagline {
+      font-size: 1.4rem;
+      color: #aef;
+      margin-top: 12px;
+      font-style: italic;
+    }
+
+    .hero .sub {
+      margin-top: 8px;
+      color: #ccc;
+      font-size: 1rem;
+    }
+
+    /* STATS */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      padding: 60px 20px;
+      background: #111;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat .number {
+      font-size: 3rem;
+      font-weight: 900;
+      color: gold;
+    }
+
+    .stat .label {
+      font-size: 0.9rem;
+      color: #aaa;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* GLAZE CARDS */
+    .section {
+      padding: 80px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 40px;
+      color: gold;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      border-radius: 16px;
+      padding: 30px 24px;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(255, 215, 0, 0.2);
+    }
+
+    .card .emoji { font-size: 2.5rem; margin-bottom: 12px; }
+    .card h3 { font-size: 1.2rem; color: #fff; margin-bottom: 8px; }
+    .card p { font-size: 0.95rem; color: #bbb; line-height: 1.6; }
+
+    /* QUOTE */
+    .quote-section {
+      background: linear-gradient(135deg, #1a1a2e, #0f2027);
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .quote {
+      font-size: 1.8rem;
+      font-style: italic;
+      color: gold;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .quote-author {
+      margin-top: 20px;
+      color: #aaa;
+      font-size: 1rem;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #000;
+      text-align: center;
+      padding: 30px;
+      color: #555;
+      font-size: 0.85rem;
+    }
+
+    footer span { color: gold; }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="crown">👑</div>
+    <div class="avatar">🦁</div>
+    <h1>Oliver Sterzer</h1>
+    <p class="tagline">The Future of Sales. The Present of Excellence.</p>
+    <p class="sub">Economics Student · University of Georgia · Atlanta, GA</p>
+  </section>
+
+  <section class="stats">
+    <div class="stat">
+      <div class="number">100%</div>
+      <div class="label">That Guy</div>
+    </div>
+    <div class="stat">
+      <div class="number">∞</div>
+      <div class="label">Potential</div>
+    </div>
+    <div class="stat">
+      <div class="number">#1</div>
+      <div class="label">In the Building</div>
+    </div>
+    <div class="stat">
+      <div class="number">0</div>
+      <div class="label">Bad Days</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Why Oliver is Built Different</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="emoji">🧠</div>
+        <h3>Big Brain Energy</h3>
+        <p>Studying Economics at UGA — this man understands markets, money, and how the world works at a level most people never reach.</p>
+      </div>
+      <div class="card">
+        <div class="emoji">💼</div>
+        <h3>Born Salesman</h3>
+        <p>Interested in Sales before it was cool. He doesn't just sell products — he sells visions, ideas, and belief.</p>
+      </div>
+      <div class="card">
+        <div class="emoji">🚀</div>
+        <h3>Relentless Ambition</h3>
+        <p>Atlanta raised, Georgia bred. Oliver moves with purpose. Every room he walks into, he's already thinking three steps ahead.</p>
+      </div>
+      <div class="card">
+        <div class="emoji">🤝</div>
+        <h3>Natural Connector</h3>
+        <p>People gravitate toward him. He makes you feel like the most important person in the room — and that's a superpower.</p>
+      </div>
+      <div class="card">
+        <div class="emoji">📈</div>
+        <h3>Always Growing</h3>
+        <p>Oliver doesn't settle. He's constantly leveling up, learning, and becoming a better version of himself every single day.</p>
+      </div>
+      <div class="card">
+        <div class="emoji">🔥</div>
+        <h3>Undeniable Rizz</h3>
+        <p>Charisma? Off the charts. Whether it's a boardroom or a networking event, Oliver walks in and the energy shifts.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="quote-section">
+    <p class="quote">"Some people dream of success. Oliver Sterzer wakes up and makes it happen."</p>
+    <p class="quote-author">— Everyone Who Has Ever Met Him</p>
+  </section>
+
+  <footer>
+    Built in honor of <span>Oliver Sterzer</span> — the absolute GOAT 🐐
+  </footer>
+
+</body>
+</html>
