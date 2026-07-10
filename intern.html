@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Intern Who Fixed Prod — Legend Status</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0a0a12;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1b0f2e, #2c1250, #0f2027);
+      text-align: center;
+      padding: 40px 20px;
+      position: relative;
+    }
+
+    .hero::before {
+      content: "💻";
+      font-size: 120px;
+      position: absolute;
+      top: 20px;
+      left: 30px;
+      opacity: 0.15;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .hero::after {
+      content: "🚨";
+      font-size: 100px;
+      position: absolute;
+      bottom: 40px;
+      right: 40px;
+      opacity: 0.15;
+      animation: float 4s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .avatar {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 5px solid #7dfcff;
+      box-shadow: 0 0 40px #7dfcff, 0 0 80px rgba(125,252,255,0.3);
+      margin-bottom: 30px;
+      background: #1a1a2e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 70px;
+    }
+
+    .badge {
+      font-size: 60px;
+      margin-bottom: 10px;
+      animation: bounce 1s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, #7dfcff, #fff, #7dfcff);
+      background-size: 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 2s infinite linear;
+      letter-spacing: 1px;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% }
+      100% { background-position: 200% }
+    }
+
+    .hero .tagline {
+      font-size: 1.3rem;
+      color: #b39ddb;
+      margin-top: 12px;
+      font-style: italic;
+    }
+
+    .hero .sub {
+      margin-top: 8px;
+      color: #ccc;
+      font-size: 1rem;
+    }
+
+    /* STATS */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      padding: 60px 20px;
+      background: #111119;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat .number {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #7dfcff;
+    }
+
+    .stat .label {
+      font-size: 0.9rem;
+      color: #aaa;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* CARDS */
+    .section {
+      padding: 80px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 40px;
+      color: #7dfcff;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border: 1px solid rgba(125, 252, 255, 0.3);
+      border-radius: 16px;
+      padding: 30px 24px;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(125, 252, 255, 0.2);
+    }
+
+    .card .emoji { font-size: 2.5rem; margin-bottom: 12px; }
+    .card h3 { font-size: 1.2rem; color: #fff; margin-bottom: 8px; }
+    .card p { font-size: 0.95rem; color: #bbb; line-height: 1.6; }
+
+    /* TIMELINE */
+    .timeline-section {
+      background: #0d0d16;
+      padding: 80px 20px;
+    }
+
+    .timeline {
+      max-width: 700px;
+      margin: 0 auto;
+      border-left: 3px solid #7dfcff;
+      padding-left: 30px;
+    }
+
+    .event {
+      margin-bottom: 36px;
+      position: relative;
+    }
+
+    .event::before {
+      content: "";
+      position: absolute;
+      left: -38px;
+      top: 4px;
+      width: 14px;
+      height: 14px;
+      background: #7dfcff;
+      border-radius: 50%;
+      box-shadow: 0 0 12px #7dfcff;
+    }
+
+    .event .time {
+      color: #7dfcff;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .event p {
+      color: #ddd;
+      margin-top: 6px;
+      line-height: 1.6;
+    }
+
+    /* QUOTE */
+    .quote-section {
+      background: linear-gradient(135deg, #1a1a2e, #0f2027);
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .quote {
+      font-size: 1.8rem;
+      font-style: italic;
+      color: #7dfcff;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .quote-author {
+      margin-top: 20px;
+      color: #aaa;
+      font-size: 1rem;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #000;
+      text-align: center;
+      padding: 30px;
+      color: #555;
+      font-size: 0.85rem;
+    }
+
+    footer span { color: #7dfcff; }
+    footer a { color: #7dfcff; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="badge">🏆</div>
+    <div class="avatar">🧑‍💻</div>
+    <h1>The Intern Who Fixed Prod</h1>
+    <p class="tagline">Day One. Zero Onboarding. One Legend Born.</p>
+    <p class="sub">Status: Full-Time Offer Pending · Slack Status: "brb saving the company"</p>
+  </section>
+
+  <section class="stats">
+    <div class="stat">
+      <div class="number">2:47am</div>
+      <div class="label">Time of the Fix</div>
+    </div>
+    <div class="stat">
+      <div class="number">1</div>
+      <div class="label">Line Changed</div>
+    </div>
+    <div class="stat">
+      <div class="number">$0</div>
+      <div class="label">Revenue Lost</div>
+    </div>
+    <div class="stat">
+      <div class="number">∞</div>
+      <div class="label">Respect Earned</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>How Legends Are Made</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="emoji">🔥</div>
+        <h3>Nerves of Steel</h3>
+        <p>Production was down, the on-call engineer was asleep, and the CEO was in the Slack channel. The intern did not flinch.</p>
+      </div>
+      <div class="card">
+        <div class="emoji">🕵️</div>
+        <h3>Instant Root Cause</h3>
+        <p>Everyone else was staring at dashboards. The intern grep'd the logs once and just... knew.</p>
+      </div>
+      <div class="card">
+        <div class="emoji">🧯</div>
+        <h3>No Ego, All Action</h3>
+        <p>Didn't wait for permission. Didn't wait for a meeting. Opened a PR, self-approved in spirit, and shipped the fix.</p>
+      </div>
+      <div class="card">
+        <div class="emoji">📉</div>
+        <h3>Turned the Graph Around</h3>
+        <p>The error rate chart went from a cliff to a flat line in real time. People screenshot it. It's still the wiki header image.</p>
+      </div>
+      <div class="card">
+        <div class="emoji">🍕</div>
+        <h3>Bought the Team Pizza</h3>
+        <p>With their own stipend. Nobody asked. That's the kind of person we're dealing with here.</p>
+      </div>
+      <div class="card">
+        <div class="emoji">👑</div>
+        <h3>Instant Folklore</h3>
+        <p>The postmortem doc has a "Hero of the Incident" section now. It didn't exist before this day. It exists because of this day.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="timeline-section">
+    <h2 style="text-align:center; color:#7dfcff; text-transform:uppercase; letter-spacing:3px; margin-bottom:40px;">The Night It Happened</h2>
+    <div class="timeline">
+      <div class="event">
+        <div class="time">9:00 AM — Day 1</div>
+        <p>Intern gets laptop. Laptop doesn't even have Slack set up yet.</p>
+      </div>
+      <div class="event">
+        <div class="time">2:41 AM</div>
+        <p>PagerDuty explodes. Checkout service is down. Revenue dashboard is a straight line to zero.</p>
+      </div>
+      <div class="event">
+        <div class="time">2:43 AM</div>
+        <p>Every senior engineer's status says "in a meeting" or "asleep, obviously." The intern's status says "online."</p>
+      </div>
+      <div class="event">
+        <div class="time">2:47 AM</div>
+        <p>One-line fix pushed. A misconfigured environment variable, hiding in plain sight the whole time.</p>
+      </div>
+      <div class="event">
+        <div class="time">2:48 AM</div>
+        <p>Graph flatlines back to normal. Someone in the channel just sends "???". Legend status: achieved.</p>
+      </div>
+      <div class="event">
+        <div class="time">9:00 AM — Day 2</div>
+        <p>Full-time offer conversation "casually" comes up in standup.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="quote-section">
+    <p class="quote">"I've been an engineer for twelve years. That kid fixed in six minutes what would've taken me until sunrise. Hire them before someone else does."</p>
+    <p class="quote-author">— The On-Call Engineer Who Woke Up Too Late</p>
+  </section>
+
+  <footer>
+    Built in honor of <span>The Intern Who Fixed Prod</span> — legend status: confirmed 🏆
+    <br/>
+    <a href="index.html">← Back to more legends</a>
+  </footer>
+
+</body>
+</html>
